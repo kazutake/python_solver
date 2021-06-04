@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SolverDefinition 
+	xmlns="www.iric.net/SolverDefinition/1.0"
+	name="python_solver" 
+	caption="Python Sample Solver" 
+	version="1.0.0"
+	copyright="RiverLink, Co.,Ltd."
+	release="2021.06.01"
+	homepage="http://i-ric.org"
+	executable="main.py"
+	iterationtype="time"
+	gridtype="structured2d"
+>
+	<CalculationCondition>
+		<Tab name="time" caption="Time">
+			<Item name="tuk" caption="Output time interval (sec)">
+				<Definition conditionType="constant" valueType="real" option="false" default="10"/>
+			</Item>
+			<Item name="dt" caption="Calculation time step (sec)">
+				<Definition conditionType="constant" valueType="real" option="false" default="0.01"/>
+			</Item>
+		</Tab>
+
+		<Tab name="solvers" caption="Solver Type">
+			<Item name="j_cip" caption="   Finite differential method of advection terms">
+				<Definition conditionType="constant" valueType="integer" option="true" default="2">
+					<Enumerations>
+						<Enumeration value="1" caption="upwind scheme"/>
+						<Enumeration value="2" caption="CIP method"/>
+					</Enumerations>
+				</Definition>
+			</Item>
+			<Item name="j_conf" caption="   +Confluence">
+				<Definition conditionType="constant" valueType="integer" option="true" default="0">
+					<Enumerations>
+						<Enumeration value="0" caption="Disabled"/>
+						<Enumeration value="1" caption="Enabled : TypeA, from left bank"/>
+						<Enumeration value="2" caption="Enabled : TypeB, from left bank"/>
+						<Enumeration value="3" caption="Enabled : TypeB, from right bank"/>
+					</Enumerations>
+				</Definition>
+			</Item>
+		</Tab>
+		<Tab name="boundary_condition" caption="Boundary Condition">
+			<Item name="i_sec_hour" caption="Time unit of discharge/water surface file">
+				<Definition conditionType="constant" valueType="integer" option="true" default="1">
+					<Enumerations>
+						<Enumeration value="1" caption="Second"/>
+						<Enumeration value="2" caption="Hour"/>
+					</Enumerations>
+				</Definition>
+			</Item>
+			<Item name="discharge_waterlevel" caption="Time series of discharge at upstream and water level at downstream">
+				<Definition conditionType="functional">
+					<Parameter name="time" valueType="real" caption="Time"/>
+					<Value name="discharge" valueType="real" caption="Discharge(m3/s)"/>
+					<Value name="water_level" valueType="real" caption="Water level(m)"/>
+				</Definition>
+			</Item>
+		</Tab>
+		
+	</CalculationCondition>
+	<GridRelatedCondition>
+		<Item name="Elevation" caption="Elevation (m)">
+			<Definition position="node" valueType="real" default="max" />
+		</Item>
+		<Item name="roughness_cell" caption="Manning&apos;s roughness coefficient">
+			<Definition position="cell" valueType="real" default="0.025">
+			</Definition>
+		</Item>
+	</GridRelatedCondition>
+</SolverDefinition>
