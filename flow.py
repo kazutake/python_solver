@@ -24,11 +24,7 @@ class flow():
 
         return ier
 
-    def set_init_flow(self, xx, yy):
 
-        
-
-        return wl, hs
 
     def update(self):
 
