@@ -17,14 +17,6 @@ class flow():
         #初期流量
         q0 = c.get_upstream_q(0)
 
-        # 初期水位と流速設定
-        self.hh = self.set_init_flow(c.xx, c.yy)
-        self.hs = self.hh - self.zz
-
-
-        return ier
-
-
 
     def update(self):
 
